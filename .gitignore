@@ -1,0 +1,16 @@
+# Raw client material (private) - not for a public repo
+Brand Assets/
+Client Brief*.pdf
+Reference.jpg
+
+# OS / editor / tooling
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+node_modules/
+.wrangler/
+
+# Lead magnet PDF is delivered by email (Google Drive + Apps Script), keep it out of the public repo
+*.pdf
