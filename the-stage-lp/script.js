@@ -27,7 +27,6 @@ const CONFIG = {
 
   /* ---------- header shadow + mobile bar ---------- */
   const header = $(".header"), mbar = $(".mbar");
-  const setHdr = () => document.documentElement.style.setProperty("--hdr", header.getBoundingClientRect().bottom + "px");
   const onScroll = () => {
     header.classList.toggle("scrolled", window.scrollY > 10);
     if (mbar) {
@@ -41,20 +40,20 @@ const CONFIG = {
   /* ---------- mobile nav ---------- */
   const toggle = $("#navToggle"), nav = $("#nav");
   toggle.addEventListener("click", () => {
-    setHdr();
     const open = nav.classList.toggle("open");
     toggle.setAttribute("aria-expanded", open);
   });
   $$("#nav a").forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }));
 
   /* ---------- active nav link ---------- */
-  const links = $$("#nav a");
+  // Every section is observed, so sections without a nav link (hero, booking…) clear the highlight.
+  const links = $$("#nav a:not(.btn)");
   const spy = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id));
+      if (e.isIntersecting) links.forEach(l => l.classList.toggle("active", !!e.target.id && l.getAttribute("href") === "#" + e.target.id));
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  links.forEach(l => { const t = $(l.getAttribute("href")); if (t) spy.observe(t); });
+  $$("main > section").forEach(s => spy.observe(s));
 
   /* ---------- reveal on scroll ---------- */
   const io = new IntersectionObserver(entries => {
@@ -135,6 +134,14 @@ const CONFIG = {
     return data;
   }
 
+  // WhatsApp = country code + local number. The lead form's number is optional:
+  // with no number, drop the code too so the sheet doesn't show a lone "+60".
+  function withFullNumber(data) {
+    if (data.whatsapp) data.whatsapp_full = ((data.country_code || "") + " " + data.whatsapp).trim();
+    else delete data.country_code;
+    return data;
+  }
+
   async function send(data) {
     if (!CONFIG.FORM_ENDPOINT) { console.info("[demo mode] form data:", data); return new Promise(r => setTimeout(r, 600)); }
     // no-cors: Apps Script doesn't return CORS headers; the request is still delivered.
@@ -162,7 +169,7 @@ const CONFIG = {
     const data = collect(bForm);
     const age = parseInt(data.child_age, 10);
     data.age_group = age <= 8 ? "5-8" : "9-12";
-    data.whatsapp_full = (data.country_code || "") + " " + data.whatsapp;
+    withFullNumber(data);
     try { await send(data); } catch (err) { console.warn(err); }
     btn.classList.remove("is-loading");
     fbq("Lead", { content_name: "The Stage Trial Booking", value: 55, currency: "MYR" });
@@ -202,6 +209,7 @@ Thank you!`;
     const btn = $("button[type=submit]", lForm);
     btn.classList.add("is-loading");
     const data = collect(lForm);
+    withFullNumber(data);
     try { await send(data); } catch (err) { console.warn(err); }
     btn.classList.remove("is-loading");
     fbq("Lead", { content_name: "Confident Kid Playbook" });

@@ -53,13 +53,13 @@ const SHEETS = {
   },
   lead_magnet: {
     name: "Playbook Leads",
-    headers: ["submitted_at", "lead_status", "email_status", "parent_name", "email", "whatsapp",
-      "child_age_group", "location", "consent",
+    headers: ["submitted_at", "lead_status", "email_status", "parent_name", "email", "whatsapp_full",
+      "country_code", "whatsapp", "child_age_group", "location", "consent",
       "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "ref", "page"]
   }
 };
 // Bump on every change; shown by the web app (GET) so you can confirm which version is live.
-const CODE_VERSION = "2026-10-31.4-inline-logo";
+const CODE_VERSION = "2026-11-01.1-lead-country-code";
 const SKIP_KEYS = ["form_type", "company"];
 const STATUS_PDF_PENDING = "Sent – PDF pending";
 
@@ -403,6 +403,7 @@ function testTrialBooking() {
 function testLeadMagnet() {
   console.log(handleSubmission_({
     form_type: "lead_magnet", parent_name: "Test Parent", email: Session.getActiveUser().getEmail(),
+    country_code: "+65", whatsapp: "9123 4567", whatsapp_full: "+65 9123 4567",
     child_age_group: "5–8 years", location: "Singapore", consent: "Yes", page: "test"
   }));
 }

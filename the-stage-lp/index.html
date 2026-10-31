@@ -58,12 +58,9 @@
       <a href="#pricing">Pricing</a>
       <a href="#guide">Free Guide</a>
       <a href="#faq">FAQ</a>
+      <a href="#book" class="btn btn--primary nav__cta">Book a Trial – RM55 <span aria-hidden="true">→</span></a>
     </nav>
     <div class="header__cta">
-      <a href="https://wa.me/60175667315" class="header__call" target="_blank" rel="noopener">
-        <span class="header__call-ico"><svg class="ico" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.2 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.6 3.6 1 1 0 01-.3 1z"/></svg></span>
-        <span><small>Chat with us</small><b>+60 17-566 7315</b></span>
-      </a>
       <a href="#book" class="btn btn--primary btn--sm">Book a Trial <span aria-hidden="true">→</span></a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
     </div>
@@ -154,24 +151,26 @@
         <p class="eyebrow eyebrow--ink">What They Learn</p>
         <h2>Three Skills, One Stage.<br>Taught at Your Child's Level.</h2>
       </div>
+      <ul class="facts reveal">
+        <li><b>Ages</b> 5–12</li>
+        <li><b>Class size</b> max 8</li>
+        <li><b>Program</b> 8 weeks</li>
+      </ul>
       <div class="cards3">
         <article class="pcard reveal">
           <div class="pcard__img"><img src="assets/img/card-drama.jpg" alt="Children acting out a scene during drama class" loading="lazy"></div>
           <h3>Drama</h3>
           <p>Role-play, storytelling and imaginative games that build creativity, empathy and teamwork.</p>
-          <dl class="pcard__meta"><div><dt>Age</dt><dd>5–12 yrs</dd></div><div><dt>Class</dt><dd>Max 8</dd></div><div><dt>Program</dt><dd>8 weeks</dd></div></dl>
         </article>
         <article class="pcard reveal">
           <div class="pcard__img"><img src="assets/img/card-speech.jpg" alt="A girl proudly holding up her speech cards" loading="lazy"></div>
           <h3>Speech</h3>
           <p>Voice, clarity and expression: learning to speak in a way people love to listen to.</p>
-          <dl class="pcard__meta"><div><dt>Age</dt><dd>5–12 yrs</dd></div><div><dt>Class</dt><dd>Max 8</dd></div><div><dt>Program</dt><dd>8 weeks</dd></div></dl>
         </article>
         <article class="pcard reveal">
           <div class="pcard__img"><img src="assets/img/card-public.jpg" alt="A young girl standing tall as she performs in front of the class" loading="lazy"></div>
           <h3>Public Speaking</h3>
           <p>Standing up, speaking out and presenting to an audience, with calm, confidence and a big smile.</p>
-          <dl class="pcard__meta"><div><dt>Age</dt><dd>5–12 yrs</dd></div><div><dt>Class</dt><dd>Max 8</dd></div><div><dt>Program</dt><dd>8 weeks</dd></div></dl>
         </article>
       </div>
     </div>
@@ -308,12 +307,12 @@
       </blockquote>
       <!-- Add more Google Reviews from parents here: copy a .qcard block and paste the review text verbatim. -->
       <div class="qcard qcard--leaf reveal">
-        <svg class="qcard__mark" viewBox="0 0 40 30"><path d="M0 30V17C0 7 5 1 15 0v6c-5 1-7 5-7 10h7v14zm22 0V17c0-10 5-16 15-17v6c-5 1-7 5-7 10h7v14z" fill="currentColor"/></svg>
+        <p class="qcard__label">Our story</p>
         <p>Not just another 30-minute add-on. Parents told us school drama classes felt too short to change anything. That's why The Stage runs for 8 weeks in small groups.</p>
         <footer><span class="avatar avatar--leaf"><svg viewBox="0 0 40 40" width="20" height="20"><use href="#d-leaf"/></svg></span><span><b>Why we built The Stage</b><small>The Family Village</small></span></footer>
       </div>
       <div class="qcard qcard--apricot reveal">
-        <svg class="qcard__mark" viewBox="0 0 40 30"><path d="M0 30V17C0 7 5 1 15 0v6c-5 1-7 5-7 10h7v14zm22 0V17c0-10 5-16 15-17v6c-5 1-7 5-7 10h7v14z" fill="currentColor"/></svg>
+        <p class="qcard__label">Our community</p>
         <p>Join 400+ members of our family community on WhatsApp for new class slots, holiday workshops and community events.</p>
         <footer><span class="avatar avatar--ink">400+</span><span><b>A community to call your own</b><small>Johor Bahru &amp; Singapore families</small></span></footer>
       </div>
@@ -357,9 +356,9 @@
               <label for="b_phone">WhatsApp number <i>*</i></label>
               <div class="phone">
                 <select name="country_code" aria-label="Country code">
-                  <option value="+60">🇲🇾 +60</option>
-                  <option value="+65">🇸🇬 +65</option>
-                  <option value="+62">🇮🇩 +62</option>
+                  <option value="+60">+60 MY</option>
+                  <option value="+65">+65 SG</option>
+                  <option value="+62">+62 ID</option>
                   <option value="">Other</option>
                 </select>
                 <input id="b_phone" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" required placeholder="12 345 6789" pattern="[0-9 +\-]{7,15}">
@@ -405,6 +404,23 @@
               <span class="age-hint" id="ageHint" hidden></span>
             </div>
           </div>
+        </fieldset>
+
+        <fieldset class="fs">
+          <legend>Your trial</legend>
+          <div class="field">
+            <span class="label">Preferred days <i>*</i></span>
+            <div class="chips" id="dayChips">
+              <label class="chip"><input type="checkbox" name="preferred_days" value="Weekday after school"><span>Weekday after school</span></label>
+              <label class="chip"><input type="checkbox" name="preferred_days" value="Saturday"><span>Saturday</span></label>
+              <label class="chip"><input type="checkbox" name="preferred_days" value="Sunday"><span>Sunday</span></label>
+            </div>
+            <span class="err">Pick at least one option.</span>
+          </div>
+        </fieldset>
+
+        <details class="more">
+          <summary><span>Tell us more about your child <small>Optional · goals, personality &amp; notes</small></span></summary>
           <div class="field">
             <span class="label">What would you love your child to gain?</span>
             <div class="chips">
@@ -425,19 +441,6 @@
               <option>Not sure yet</option>
             </select>
           </div>
-        </fieldset>
-
-        <fieldset class="fs">
-          <legend>Your trial</legend>
-          <div class="field">
-            <span class="label">Preferred days <i>*</i></span>
-            <div class="chips" id="dayChips">
-              <label class="chip"><input type="checkbox" name="preferred_days" value="Weekday after school"><span>Weekday after school</span></label>
-              <label class="chip"><input type="checkbox" name="preferred_days" value="Saturday"><span>Saturday</span></label>
-              <label class="chip"><input type="checkbox" name="preferred_days" value="Sunday"><span>Sunday</span></label>
-            </div>
-            <span class="err">Pick at least one option.</span>
-          </div>
           <div class="field">
             <label for="b_src">How did you hear about us?</label>
             <select id="b_src" name="heard_from">
@@ -451,10 +454,10 @@
             </select>
           </div>
           <div class="field">
-            <label for="b_note">Anything we should know? <small>(optional)</small></label>
+            <label for="b_note">Anything we should know?</label>
             <textarea id="b_note" name="notes" rows="3" placeholder="e.g. allergies, special needs, siblings joining…"></textarea>
           </div>
-        </fieldset>
+        </details>
 
         <label class="check">
           <input type="checkbox" name="consent" required>
@@ -533,7 +536,15 @@
           </div>
           <div class="field">
             <label for="l_wa">WhatsApp <small>(optional)</small></label>
-            <input id="l_wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+60 12 345 6789" pattern="[0-9 +\-]{7,16}">
+            <div class="phone">
+              <select name="country_code" aria-label="Country code">
+                <option value="+60">+60 MY</option>
+                <option value="+65">+65 SG</option>
+                <option value="+62">+62 ID</option>
+                <option value="">Other</option>
+              </select>
+              <input id="l_wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="12 345 6789" pattern="[0-9 +\-]{7,15}">
+            </div>
             <span class="err">Please check the number.</span>
           </div>
         </div>
@@ -548,10 +559,9 @@
           </select>
         </div>
         <label class="check">
-          <input type="checkbox" name="consent" required>
-          <span>Send me the guide plus occasional tips &amp; class updates from The Family Village. Unsubscribe anytime. <i>*</i></span>
+          <input type="checkbox" name="consent">
+          <span>Also send me occasional tips &amp; class updates from The Family Village. Unsubscribe anytime.</span>
         </label>
-        <span class="err err--consent">Please tick to receive the guide.</span>
         <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit" class="btn btn--primary btn--block">Send Me the Free Playbook <span aria-hidden="true">↓</span></button>
       </form>
@@ -653,9 +663,9 @@
     <div>
       <h4>Get in Touch</h4>
       <ul class="footer__contact">
-        <li>📍 Johor Bahru, Malaysia</li>
-        <li>💬 <a href="https://wa.me/60175667315" target="_blank" rel="noopener">+60 17-566 7315</a></li>
-        <li>📸 <a href="https://instagram.com/the.family.village" target="_blank" rel="noopener">@the.family.village</a></li>
+        <li><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>Johor Bahru, Malaysia</span></li>
+        <li><a href="https://wa.me/60175667315" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>+60 17-566 7315</a></li>
+        <li><a href="https://instagram.com/the.family.village" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1016.8 12 4.8 4.8 0 0012 7.2zm0 7.9a3.1 3.1 0 113.1-3.1 3.1 3.1 0 01-3.1 3.1zM17 6a1.1 1.1 0 101.1 1.1A1.1 1.1 0 0017 6zm4.9 1.9a5.6 5.6 0 00-1.5-4 5.6 5.6 0 00-4-1.5C15 2.3 9 2.3 7.6 2.4a5.6 5.6 0 00-4 1.5 5.6 5.6 0 00-1.5 4C2 9.4 2 14.6 2.1 16.1a5.6 5.6 0 001.5 4 5.6 5.6 0 004 1.5c1.5.1 7.4.1 8.9 0a5.6 5.6 0 004-1.5 5.6 5.6 0 001.5-4c.1-1.5.1-6.7-.1-8.2zm-2.1 9.7a3.2 3.2 0 01-1.8 1.8c-1.3.5-4.2.4-5.6.4s-4.3.1-5.6-.4a3.2 3.2 0 01-1.8-1.8c-.5-1.3-.4-4.2-.4-5.6s-.1-4.3.4-5.6A3.2 3.2 0 016.4 4.6C7.7 4.1 10.6 4.2 12 4.2s4.3-.1 5.6.4a3.2 3.2 0 011.8 1.8c.5 1.3.4 4.2.4 5.6s.1 4.3-.4 5.6z"/></svg>@the.family.village</a></li>
       </ul>
     </div>
   </div>
