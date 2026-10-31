@@ -2,7 +2,7 @@
 
 Landing page for **The Stage**, The Family Village's 8-week drama, speech & public speaking program for kids aged 5–12 in Johor Bahru.
 
-**Live:** https://stage.familyvillage.pages.dev
+**Live:** https://stage.the-family-village.pages.dev
 
 ## What's inside
 
@@ -29,10 +29,13 @@ The page posts both forms to the Apps Script Web App set in `CONFIG.FORM_ENDPOIN
 
 ## Deploy (Cloudflare Pages, Git integration)
 
+- Project name: **`the-family-village`**
 - Framework preset: **None**
 - Build command: *(empty)*
-- Build output directory: **`the-stage-lp`**
-- Production branch: `main`; the `stage` branch is served at `stage.<project>.pages.dev`
+- Build output directory: **`the-stage-lp`** (also set in `wrangler.jsonc` via `pages_build_output_dir`)
+- Production branch: `main` → `the-family-village.pages.dev`
+- Preview branch `stage` → **`stage.the-family-village.pages.dev`**
+- Push to both: `git push origin main main:stage`
 
 ## To do before launch
 

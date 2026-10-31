@@ -37,7 +37,7 @@ const CONFIG = {
   PLAYBOOK_PDF_FILE_ID: "",
   PLAYBOOK_FILE_NAME: "The-Confident-Kid-Playbook.pdf",
 
-  LP_URL: "https://stage.familyvillage.pages.dev",
+  LP_URL: "https://stage.the-family-village.pages.dev",
   SENDER_NAME: "The Family Village",
   REPLY_TO: "",       // e.g. "hello@the-family-village.com" (optional)
   NOTIFY_EMAIL: ""    // team inbox for new-lead alerts (optional)

@@ -1,6 +1,6 @@
 # Setup: Form LP → Google Sheets + Email Otomatis
 
-Alur: visitor submit form di https://stage.familyvillage.pages.dev → data masuk ke Google Sheet → Apps Script langsung mengirim email:
+Alur: visitor submit form di https://stage.the-family-village.pages.dev → data masuk ke Google Sheet → Apps Script langsung mengirim email:
 
 | Form | Tab di Sheet | Email ke visitor |
 |---|---|---|
@@ -32,9 +32,9 @@ Kolom `email_status` di sheet mencatat hasil pengiriman email (`Sent`, `Sent –
 1. Klik **Deploy → New deployment**, lalu ikon ⚙️ → **Web app**.
 2. Isi **Execute as: Me** dan **Who has access: Anyone**.
 3. Klik **Deploy**, lalu salin **Web app URL** (berakhiran `/exec`).
-4. Tempel URL tersebut ke `FORM_ENDPOINT` di `the-stage-lp/script.js`, lalu deploy ulang LP:
+4. Tempel URL tersebut ke `FORM_ENDPOINT` di `the-stage-lp/script.js`, lalu push ke GitHub (Cloudflare Pages otomatis deploy):
    ```
-   npx wrangler pages deploy the-stage-lp --project-name familyvillage --branch stage
+   git add -A && git commit -m "Update form endpoint" && git push origin main main:stage
    ```
    (Atau kirim URL-nya ke Claude untuk dipasang dan di-deploy.)
 
