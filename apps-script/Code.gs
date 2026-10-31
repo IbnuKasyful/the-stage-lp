@@ -183,8 +183,25 @@ function sendTrialEmail_(p) {
 }
 
 function sendPlaybookEmail_(p) {
+  // The PDF must never block the email: if it can't be loaded or attached,
+  // the lead still gets the "on its way" email and the reason is logged in the sheet.
+  let pdf = null, pdfError = "";
+  try { pdf = getPlaybookPdf_(); } catch (err) { pdfError = errMsg_(err); }
+
+  if (pdf) {
+    try {
+      MailApp.sendEmail(mailOpts_(buildPlaybookEmail_(p, pdf)));
+      return "Sent – with PDF";
+    } catch (err) {
+      pdfError = "attach failed: " + errMsg_(err);   // e.g. attachment too large
+    }
+  }
+  MailApp.sendEmail(mailOpts_(buildPlaybookEmail_(p, null)));
+  return pdfError ? `${STATUS_PDF_PENDING} (PDF error: ${pdfError})`.slice(0, 250) : STATUS_PDF_PENDING;
+}
+
+function buildPlaybookEmail_(p, pdf) {
   const first = firstName_(p.parent_name);
-  const pdf = getPlaybookPdf_();
   const pdfText = pdf
     ? `<p style="margin:0 0 16px">Your free <b>Confident Kid Playbook</b> is attached to this email 📎. Inside you'll find 7 screen-free drama &amp; speech games you can play at home in under 10 minutes a day.</p>`
     : `<p style="margin:0 0 16px">Thank you for requesting the <b>Confident Kid Playbook</b>! We're putting the finishing touches on it, and <b>we'll send the PDF to this email as soon as it's ready</b>.</p>`;
@@ -214,18 +231,54 @@ function sendPlaybookEmail_(p) {
     ])
   };
   if (pdf) opts.attachments = [pdf];
-  MailApp.sendEmail(mailOpts_(opts));
-  return pdf ? "Sent – with PDF" : STATUS_PDF_PENDING;
+  return opts;
+}
+
+function playbookFileId_() {
+  const raw = (PropertiesService.getScriptProperties().getProperty("PLAYBOOK_PDF") || CONFIG.PLAYBOOK_PDF_FILE_ID || "").trim();
+  if (!raw) return "";
+  // accept a full Drive link (…/d/<ID>/… or ?id=<ID>) or a bare file ID
+  const m = raw.match(/\/d\/([\w-]{20,})/) || raw.match(/[?&]id=([\w-]{20,})/);
+  return m ? m[1] : raw;
 }
 
 function getPlaybookPdf_() {
-  const raw = (PropertiesService.getScriptProperties().getProperty("PLAYBOOK_PDF") || CONFIG.PLAYBOOK_PDF_FILE_ID || "").trim();
-  if (!raw) return null;
-  // accept a full Drive link (…/d/<ID>/… or ?id=<ID>) or a bare file ID
-  const m = raw.match(/\/d\/([\w-]{20,})/) || raw.match(/[?&]id=([\w-]{20,})/);
-  const id = m ? m[1] : raw;
+  const id = playbookFileId_();
+  if (!id) return null;
   return DriveApp.getFileById(id).getBlob().setName(CONFIG.PLAYBOOK_FILE_NAME);
 }
+
+/**
+ * DIAGNOSIS – run from the editor and read the Execution log.
+ * Checks the PLAYBOOK_PDF property, Drive access, file size and email quota,
+ * then sends a real test playbook email to your own address.
+ */
+function checkPlaybookSetup() {
+  const me = Session.getActiveUser().getEmail();
+  console.log("Script owner / sender: " + me);
+  console.log("Remaining email quota today: " + MailApp.getRemainingDailyQuota());
+  const prop = PropertiesService.getScriptProperties().getProperty("PLAYBOOK_PDF");
+  console.log("Script Property PLAYBOOK_PDF: " + (prop ? prop : "(not set)"));
+  const id = playbookFileId_();
+  if (!id) { console.log("➜ No PDF configured: leads get the 'on its way' email."); }
+  else {
+    console.log("Parsed file ID: " + id);
+    try {
+      const f = DriveApp.getFileById(id);
+      const mb = (f.getSize() / 1048576).toFixed(1);
+      console.log(`File OK: "${f.getName()}" · ${f.getMimeType()} · ${mb} MB · owner ${f.getOwner() ? f.getOwner().getEmail() : "?"}`);
+      if (f.getMimeType() !== "application/pdf") console.log("⚠ File is not a PDF.");
+      if (f.getSize() > 24 * 1048576) console.log("⚠ Over ~24 MB: Gmail will refuse the attachment. Compress the PDF.");
+    } catch (err) {
+      console.log("✖ Cannot open the file with this account: " + errMsg_(err));
+      console.log("➜ Fix: upload the PDF with " + me + ", or share the file with " + me + " (Viewer is enough).");
+    }
+  }
+  const status = sendPlaybookEmail_({ parent_name: "Test", email: me });
+  console.log("Test email result: " + status);
+}
+
+function errMsg_(err) { return String((err && err.message) || err).replace(/\s+/g, " ").slice(0, 160); }
 
 /**
  * Run this manually once the PDF is ready and PLAYBOOK_PDF_FILE_ID is filled in.
@@ -238,7 +291,9 @@ function sendPendingPlaybooks() {
   const col = name => headers.indexOf(name);
   let sent = 0;
   for (let r = 1; r < data.length; r++) {
-    if (data[r][col("email_status")] !== STATUS_PDF_PENDING) continue;
+    const st = String(data[r][col("email_status")]);
+    // rows still waiting for the PDF, or whose email failed earlier
+    if (!(st.indexOf(STATUS_PDF_PENDING) === 0 || st.indexOf("Error") === 0 || st === "Sending…")) continue;
     const p = {};
     headers.forEach((h, i) => p[h] = String(data[r][i]));
     try {

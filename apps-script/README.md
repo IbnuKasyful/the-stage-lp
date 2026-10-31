@@ -49,6 +49,15 @@ Kolom `email_status` di sheet mencatat hasil pengiriman email (`Sent`, `Sent –
 > Script Properties dibaca saat script berjalan, jadi mengganti PDF nanti juga cukup dengan mengubah value-nya.
 > Mengubah **kode** tetap butuh *Manage deployments → New version*.
 
+## 5. Email playbook tidak terkirim? (diagnosis)
+1. Lihat kolom `email_status` di tab `Playbook Leads`. Kalau ada `PDF error: …`, itu penyebabnya.
+2. Di editor, pilih fungsi **`checkPlaybookSetup`**, klik **Run**, lalu buka **Execution log**. Log menampilkan akun pengirim, sisa kuota email, link dan File ID PDF, ukuran file, dan apakah akun script bisa membuka file itu. Fungsi ini juga mengirim satu email tes ke akun Anda.
+3. Penyebab paling umum:
+   - **PDF bukan milik atau tidak di-share ke akun pemilik script**: upload PDF dengan akun itu, atau share file-nya ke akun tersebut (cukup Viewer).
+   - **Ukuran PDF > ~24 MB**: kompres PDF-nya.
+   - **Kode baru belum di-deploy**: *Manage deployments → ✏️ → New version → Deploy*.
+4. Setelah diperbaiki, jalankan **`sendPendingPlaybooks`** untuk mengirim ulang ke semua lead yang belum menerima PDF, termasuk yang statusnya `Error`.
+
 ---
 
 ## Catatan
