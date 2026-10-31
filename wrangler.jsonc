@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers (static assets) config for The Stage landing page.
+  // Workers Builds runs `npx wrangler deploy`, which serves the files in ./the-stage-lp
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "familyvillage",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./the-stage-lp"
+  }
+}
