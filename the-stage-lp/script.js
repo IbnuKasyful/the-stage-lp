@@ -10,7 +10,7 @@
    The playbook PDF is delivered by email from Apps Script, not from this page.
    ========================================================= */
 const CONFIG = {
-  FORM_ENDPOINT: "https://script.google.com/macros/s/AKfycbwlifcY7dEXYJPg1OHBevUQW2d3tfAs5beEBlnM1L3EfVgMLM3eHD78ZcUN4uj8_I58/exec",
+  FORM_ENDPOINT: "https://script.google.com/macros/s/AKfycbwi97020HZhjKs6vFG8xVFBOXzouRIWIE1wViuMa3FcUQbI9uZguqJERjxe1Xfnc4JLJA/exec",
   WHATSAPP_NUMBER: "60175667315",
   WA_COMMUNITY_URL: "https://chat.whatsapp.com/DUMMY-TheFamilyVillage-Community"
 };
