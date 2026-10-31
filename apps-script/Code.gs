@@ -58,6 +58,8 @@ const SHEETS = {
       "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "ref", "page"]
   }
 };
+// Bump on every change; shown by the web app (GET) so you can confirm which version is live.
+const CODE_VERSION = "2026-10-31.4-inline-logo";
 const SKIP_KEYS = ["form_type", "company"];
 const STATUS_PDF_PENDING = "Sent – PDF pending";
 
@@ -79,7 +81,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return json_({ ok: true, service: "The Stage LP form endpoint" });
+  return json_({ ok: true, service: "The Stage LP form endpoint", version: CODE_VERSION });
 }
 
 /* ================================================================
