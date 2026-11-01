@@ -9,7 +9,7 @@
  *        "Playbook Leads"  ← lead magnet form
  *   2. Emails the visitor:
  *        Trial  → booking confirmation + WhatsApp Community link
- *        Lead   → Confident Kid Playbook PDF (attachment) + WhatsApp Community link
+ *        Lead   → 7 Days to Speak Up PDF (attachment) + WhatsApp Community link
  *   3. (Optional) Notifies the team at NOTIFY_EMAIL
  *   4. Writes the email result into the "email_status" column
  *
@@ -28,14 +28,14 @@ const CONFIG = {
   // WhatsApp number for direct chat (country code, no +).
   WA_CHAT_NUMBER: "60175667315",
 
-  // Confident Kid Playbook PDF (file coming later).
+  // 7 Days to Speak Up PDF (internally still called "playbook").
   // RECOMMENDED: set it WITHOUT redeploying via Project Settings (⚙️) → Script Properties →
   //   Property: PLAYBOOK_PDF   Value: the Google Drive link (or file ID) of the PDF.
   // The Script Property wins over the value below. A full Drive link or a bare ID both work.
   // While empty, leads still get an email saying the PDF is on its way, and are
   // marked "PDF pending". Run sendPendingPlaybooks() once the file is added.
   PLAYBOOK_PDF_FILE_ID: "",
-  PLAYBOOK_FILE_NAME: "The-Confident-Kid-Playbook.pdf",
+  PLAYBOOK_FILE_NAME: "7-Days-to-Speak-Up.pdf",
 
   LP_URL: "https://stage.the-family-village.pages.dev",
   SENDER_NAME: "The Family Village",
@@ -59,7 +59,7 @@ const SHEETS = {
   }
 };
 // Bump on every change; shown by the web app (GET) so you can confirm which version is live.
-const CODE_VERSION = "2026-11-01.1-lead-country-code";
+const CODE_VERSION = "2026-11-01.2-7-days-to-speak-up";
 const SKIP_KEYS = ["form_type", "company"];
 const STATUS_PDF_PENDING = "Sent – PDF pending";
 
@@ -209,8 +209,8 @@ function sendPlaybookEmail_(p) {
 function buildPlaybookEmail_(p, pdf) {
   const first = firstName_(p.parent_name);
   const pdfText = pdf
-    ? `<p style="margin:0 0 16px">Your free <b>Confident Kid Playbook</b> is attached to this email 📎. Inside you'll find 7 screen-free drama &amp; speech games you can play at home in under 10 minutes a day.</p>`
-    : `<p style="margin:0 0 16px">Thank you for requesting the <b>Confident Kid Playbook</b>! We're putting the finishing touches on it, and <b>we'll send the PDF to this email as soon as it's ready</b>.</p>`;
+    ? `<p style="margin:0 0 16px">Your free copy of <b>7 Days to Speak Up</b> is attached to this email 📎. Inside you'll find seven short activities you and your child can do at home in about 5 minutes a day.</p>`
+    : `<p style="margin:0 0 16px">Thank you for requesting <b>7 Days to Speak Up</b>! We're putting the finishing touches on it, and <b>we'll send the PDF to this email as soon as it's ready</b>.</p>`;
   const body = `
     <p style="margin:0 0 16px">Hi ${esc_(first)},</p>
     ${pdfText}
@@ -226,11 +226,11 @@ function buildPlaybookEmail_(p, pdf) {
     <p style="margin:22px 0 0">Warmly,<br><b>Melissa &amp; The Family Village team</b></p>`;
   const opts = {
     to: p.email,
-    subject: pdf ? "📘 Your free Confident Kid Playbook is here" : "📘 Your Confident Kid Playbook is on its way",
-    htmlBody: layout_(pdf ? "Your playbook is here!" : "Your playbook is on its way!", body),
+    subject: pdf ? "📘 Your free copy of 7 Days to Speak Up is here" : "📘 Your copy of 7 Days to Speak Up is on its way",
+    htmlBody: layout_(pdf ? "Your activity book is here!" : "Your activity book is on its way!", body),
     body: plain_([
       `Hi ${first},`, "",
-      pdf ? "Your free Confident Kid Playbook is attached." : "We'll email your Confident Kid Playbook PDF as soon as it's ready.", "",
+      pdf ? "Your free copy of 7 Days to Speak Up is attached." : "We'll email your copy of 7 Days to Speak Up as soon as it's ready.", "",
       `Join our WhatsApp Community: ${CONFIG.WA_COMMUNITY_URL}`,
       `Book a RM55 trial class: ${CONFIG.LP_URL}/#book`, "",
       "Melissa & The Family Village team"

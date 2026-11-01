@@ -212,7 +212,7 @@ Thank you!`;
     withFullNumber(data);
     try { await send(data); } catch (err) { console.warn(err); }
     btn.classList.remove("is-loading");
-    fbq("Lead", { content_name: "Confident Kid Playbook" });
+    fbq("Lead", { content_name: "7 Days to Speak Up" });
     $$("[data-name]", lSuccess).forEach(n => n.textContent = data.parent_name.split(" ")[0]);
     $$("[data-email]", lSuccess).forEach(n => n.textContent = data.email);
     lForm.hidden = true; lSuccess.hidden = false;

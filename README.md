@@ -23,7 +23,7 @@ apps-script/
 | Form | Sheet tab | Auto email |
 |---|---|---|
 | Book a Trial Class (RM55) | `Trial Bookings` | Booking confirmation + WhatsApp Community link |
-| Confident Kid Playbook (lead magnet) | `Playbook Leads` | Playbook PDF attachment + WhatsApp Community link |
+| 7 Days to Speak Up (lead magnet) | `Playbook Leads` | Playbook PDF attachment + WhatsApp Community link |
 
 The page posts both forms to the Apps Script Web App set in `CONFIG.FORM_ENDPOINT` (`the-stage-lp/script.js`). See [`apps-script/README.md`](apps-script/README.md) for setup, and for adding the playbook PDF later via Script Properties (no redeploy needed).
 
@@ -40,5 +40,5 @@ The page posts both forms to the Apps Script Web App set in `CONFIG.FORM_ENDPOIN
 ## To do before launch
 
 - Replace the dummy WhatsApp Community link in `the-stage-lp/script.js` **and** `apps-script/Code.gs` (`WA_COMMUNITY_URL`).
-- Add the Confident Kid Playbook PDF (Script Property `PLAYBOOK_PDF`).
+- Add the 7 Days to Speak Up PDF (Script Property `PLAYBOOK_PDF`).
 - Add more parent testimonials from Google Reviews (see comment in `index.html`).

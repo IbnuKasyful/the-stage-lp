@@ -5,7 +5,7 @@ Alur: visitor submit form di https://stage.the-family-village.pages.dev → data
 | Form | Tab di Sheet | Email ke visitor |
 |---|---|---|
 | Book a Trial Class | `Trial Bookings` | Konfirmasi booking + ringkasan + tombol **Join WhatsApp Community** |
-| Confident Kid Playbook | `Playbook Leads` | **PDF playbook (lampiran)** + tombol **Join WhatsApp Community** + CTA trial RM55 |
+| 7 Days to Speak Up | `Playbook Leads` | **PDF playbook (lampiran)** + tombol **Join WhatsApp Community** + CTA trial RM55 |
 
 Kolom `email_status` di sheet mencatat hasil pengiriman email (`Sent`, `Sent – with PDF`, `Sent – PDF pending`, atau `Error: …`). Kolom `lead_status` (default `New`) bisa dipakai sebagai CRM.
 
